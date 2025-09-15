@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressive Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="weather-app">
+        <div class="weather-dashboard">
+            <h1>Weather Forecast</h1>
+            <div class="search-box">
+                <input type="text" id="city-input" placeholder="Enter city name...">
+                <button id="city-search-btn">Search by City</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="pincode-input" placeholder="Enter pincode...">
+                <button id="pincode-search-btn">Search by Pincode</button>
+            </div>
+            <div id="weather-display" class="hidden">
+                <h2 id="location-name"></h2>
+                <div class="current-weather">
+                    <div class="weather-info">
+                        <p>Temperature: <span id="temp"></span>°C</p>
+                        <p>Conditions: <span id="conditions"></span></p>
+                        <p>Humidity: <span id="humidity"></span>%</p>
+                        <p>Wind Speed: <span id="wind-speed"></span> km/h</p>
+                    </div>
+                    <img id="weather-icon" src="" alt="Weather icon">
+                </div>
+            </div>
+            <p id="error-message" class="hidden"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

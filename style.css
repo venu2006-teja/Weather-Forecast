@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+
+    /* Animated Background */
+    background: linear-gradient(-45deg, #a8c0ff, #3f2b96, #00c6ff, #a8c0ff);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+/* Keyframes for the gradient animation */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.weather-app {
+    padding: 2em;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+h1 {
+    color: #fff;
+    font-size: 2em;
+    margin-bottom: 1em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.search-box {
+    margin-bottom: 1.5em;
+    display: flex;
+    gap: 10px;
+}
+
+#city-input,
+#pincode-input {
+    flex: 1;
+    padding: 0.8em;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: border-color 0.3s;
+}
+
+#city-input::placeholder,
+#pincode-input::placeholder {
+    color: #888;
+}
+
+#city-input:focus,
+#pincode-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #007bff;
+}
+
+#city-search-btn,
+#pincode-search-btn {
+    padding: 0.8em 1.5em;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+}
+
+#city-search-btn:hover,
+#pincode-search-btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+#weather-display {
+    padding: 1em;
+    border: none;
+    border-radius: 8px;
+    margin-top: 1.5em;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.7);
+    transition: all 0.5s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+#location-name {
+    margin-top: 0;
+    color: #333;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.current-weather {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1em;
+}
+
+.weather-info p {
+    margin: 0.5em 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+#weather-icon {
+    width: 100px;
+    height: auto;
+}
+
+#error-message {
+    color: #d9534f;
+    margin-top: 1em;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .weather-app {
+        padding: 1em;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+}
