@@ -3,36 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impressive Weather Dashboard</title>
+    <title>Weather Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="weather-app">
-        <div class="weather-dashboard">
-            <h1>Weather Forecast</h1>
+    <div class="container">
+        <header>
+            <h1>Weather Dashboard</h1>
             <div class="search-box">
-                <input type="text" id="city-input" placeholder="Enter city name...">
-                <button id="city-search-btn">Search by City</button>
+                <input type="text" id="city-input" placeholder="E.g., New York, London...">
+                <button id="search-button">Search</button>
             </div>
-            <div class="search-box">
-                <input type="text" id="pincode-input" placeholder="Enter pincode...">
-                <button id="pincode-search-btn">Search by Pincode</button>
-            </div>
-            <div id="weather-display" class="hidden">
-                <h2 id="location-name"></h2>
-                <div class="current-weather">
-                    <div class="weather-info">
-                        <p>Temperature: <span id="temp"></span>°C</p>
-                        <p>Conditions: <span id="conditions"></span></p>
-                        <p>Humidity: <span id="humidity"></span>%</p>
-                        <p>Wind Speed: <span id="wind-speed"></span> km/h</p>
+        </header>
+
+        <main id="weather-content" class="hidden">
+            <div class="current-weather-section">
+                <div id="current-weather-card">
                     </div>
-                    <img id="weather-icon" src="" alt="Weather icon">
+                <div id="weather-effects-card">
+                    <h2>Today's Weather Effects & Advice</h2>
+                    <p id="effects-text">Enter a city to see advice.</p>
                 </div>
             </div>
-            <p id="error-message" class="hidden"></p>
+
+            <div class="forecast-section">
+                <h2>5-Day Forecast</h2>
+                <div id="forecast-container">
+                    </div>
+            </div>
+        </main>
+        
+        <div id="initial-message">
+            <p>Enter a city to get started! 🌦️</p>
         </div>
+
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
