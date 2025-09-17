@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
+    <title>Weather Forecast</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="rainy-bg" class="weather-background"></div>
+    <div id="sunny-bg" class="weather-background"></div>
+    <div id="cloudy-bg" class="weather-background"></div>
+
     <div class="container">
         <header>
             <h1>Weather Dashboard</h1>
             <div class="search-box">
-                <input type="text" id="city-input" placeholder="E.g., New York, London...">
+                <input type="text" id="city-input" placeholder="Enter city name or pincode...">
                 <button id="search-button">Search</button>
             </div>
         </header>
 
         <main id="weather-content" class="hidden">
             <div class="current-weather-section">
-                <div id="current-weather-card">
-                    </div>
+                <div id="current-weather-card"></div>
                 <div id="weather-effects-card">
                     <h2>Today's Weather Effects & Advice</h2>
                     <p id="effects-text">Enter a city to see advice.</p>
@@ -28,15 +31,13 @@
 
             <div class="forecast-section">
                 <h2>5-Day Forecast</h2>
-                <div id="forecast-container">
-                    </div>
+                <div id="forecast-container"></div>
             </div>
         </main>
         
         <div id="initial-message">
             <p>Enter a city to get started! 🌦️</p>
         </div>
-
     </div>
 
     <script src="script.js"></script>
