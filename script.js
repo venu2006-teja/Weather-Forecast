@@ -10,11 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const effectsText = document.getElementById('effects-text');
     const forecastContainer = document.getElementById('forecast-container');
     
-    // Nature Background references
-    const sunnyBg = document.getElementById('sunny-bg');
-    const rainyBg = document.getElementById('rainy-bg');
-    const cloudyBg = document.getElementById('cloudy-bg');
-
+    // Background element references for Day and Night
+    const backgroundElements = {
+        sunnyDay: document.getElementById('sunny-day-bg'),
+        cloudyDay: document.getElementById('cloudy-day-bg'),
+        rainyDay: document.getElementById('rainy-day-bg'),
+        clearNight: document.getElementById('clear-night-bg'),
+        cloudyNight: document.getElementById('cloudy-night-bg'),
+        rainyNight: document.getElementById('rainy-night-bg')
+    };
+    
     // Event listeners
     searchButton.addEventListener('click', () => fetchWeather(cityInput.value));
     cityInput.addEventListener('keydown', (e) => {
@@ -46,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             displayCurrentWeather(forecastData.list[0], forecastData.city.name, pincodeToDisplay);
             displayForecast(forecastData);
-            updateWeatherBackground(forecastData.list[0].weather[0].description);
+            updateWeatherBackground(forecastData.list[0], forecastData.city);
 
         } catch (error) {
             alert(error.message);
@@ -62,14 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
         effectsText.innerHTML = getWeatherEffects(conditions);
     }
     
-    // =================================================================
-    // ▼▼▼ UPDATED FORECAST FUNCTION FOR RELIABLE 5-DAY DISPLAY ▼▼▼
-    // =================================================================
     function displayForecast(data) {
         forecastContainer.innerHTML = '';
         const dailyData = {};
 
-        // Group forecast items by date
         for (const item of data.list) {
             const date = new Date(item.dt_txt).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
             if (!dailyData[date]) {
@@ -78,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
             dailyData[date].push(item);
         }
 
-        // Get the next 5 unique days, starting from tomorrow
         const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
         const forecastDays = Object.keys(dailyData).filter(date => date !== today).slice(0, 5);
 
@@ -86,11 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const dayItems = dailyData[date];
             if (!dayItems || dayItems.length === 0) continue;
 
-            // Find the weather icon from around midday for a representative icon
             const middayItem = dayItems.find(item => new Date(item.dt_txt).getHours() >= 12) || dayItems[0];
             const iconUrl = `https://openweathermap.org/img/wn/${middayItem.weather[0].icon}@2x.png`;
             
-            // Calculate min and max temps for the day
             const minTemp = Math.min(...dayItems.map(item => item.main.temp_min));
             const maxTemp = Math.max(...dayItems.map(item => item.main.temp_max));
             
@@ -119,23 +117,50 @@ document.addEventListener('DOMContentLoaded', () => {
         return effects.length > 0 ? effects.join('<br>') : "🌤️ **Mild Conditions:** Enjoy your day!";
     }
 
-    function updateWeatherBackground(description) {
-        const desc = description.toLowerCase();
-        
-        // Hide all backgrounds first
-        sunnyBg.style.opacity = '0';
-        rainyBg.style.opacity = '0';
-        cloudyBg.style.opacity = '0';
+    function updateWeatherBackground(currentData, cityData) {
+        // Hide all backgrounds first to ensure a clean transition
+        for (const key in backgroundElements) {
+            if (backgroundElements[key]) {
+                backgroundElements[key].style.opacity = '0';
+            }
+        }
+
+        const desc = currentData.weather[0].description.toLowerCase();
+        const currentTimeUTC = currentData.dt;
+        const sunriseUTC = cityData.sunrise;
+        const sunsetUTC = cityData.sunset;
+
+        // Determine if it's currently daytime at the location
+        const isDay = currentTimeUTC >= sunriseUTC && currentTimeUTC < sunsetUTC;
+
+        let activeBg = null;
+
+        if (isDay) {
+            // Daytime Logic
+            if (desc.includes('sun') || desc.includes('clear')) {
+                activeBg = backgroundElements.sunnyDay;
+            } else if (desc.includes('rain') || desc.includes('drizzle') || desc.includes('storm')) {
+                activeBg = backgroundElements.rainyDay;
+            } else { // Default to cloudy for mist, haze, clouds, etc.
+                activeBg = backgroundElements.cloudyDay;
+            }
+        } else {
+            // Nighttime Logic
+            if (desc.includes('clear')) {
+                activeBg = backgroundElements.clearNight;
+            } else if (desc.includes('rain') || desc.includes('drizzle') || desc.includes('storm')) {
+                activeBg = backgroundElements.rainyNight;
+            } else { // Default to cloudy night
+                activeBg = backgroundElements.cloudyNight;
+            }
+        }
 
         // Show the correct background with a fade-in effect
-        if (desc.includes('sun') || desc.includes('clear')) {
-            sunnyBg.style.opacity = '1';
-        } else if (desc.includes('rain') || desc.includes('drizzle') || desc.includes('storm')) {
-            rainyBg.style.opacity = '1';
-        } else if (desc.includes('cloud') || desc.includes('overcast') || desc.includes('haze') || desc.includes('mist')) {
-            cloudyBg.style.opacity = '1';
+        if (activeBg) {
+            activeBg.style.opacity = '1';
         } else {
-            cloudyBg.style.opacity = '1';
+            // Fallback to a default if something goes wrong
+            (isDay ? backgroundElements.cloudyDay : backgroundElements.cloudyNight).style.opacity = '1';
         }
     }
 });
