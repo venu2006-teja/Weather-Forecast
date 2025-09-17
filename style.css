@@ -3,9 +3,8 @@
 /* --- General Setup --- */
 body {
     font-family: 'Poppins', sans-serif;
-    /* CHANGED: New light blue gradient */
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    color: #4A5568; /* CHANGED: Dark gray text for better contrast */
+    color: #4A5568; 
     margin: 0;
     padding: 20px;
     display: flex;
@@ -16,7 +15,6 @@ body {
 .container {
     width: 100%;
     max-width: 1200px;
-    /* REMOVED: No longer need the blur/brightness filter with a light background */
     background-color: transparent;
     border-radius: 20px;
     padding: 30px;
@@ -29,7 +27,6 @@ body {
 header {
     text-align: center;
     margin-bottom: 30px;
-    /* CHANGED: Darker text color for readability */
     color: #2D3748;
 }
 
@@ -43,29 +40,29 @@ header h1 {
     justify-content: center;
     gap: 10px;
     margin-top: 15px;
-    align-items: center; /* ALIGNMENT: Vertically align items in the search box */
+    align-items: center;
 }
 
 .search-box input {
     padding: 12px 20px;
     font-size: 16px;
-    border: 1px solid #E2E8F0; /* CHANGED: Subtle border */
+    border: 1px solid #E2E8F0;
     border-radius: 30px;
     width: 350px;
-    background-color: #FFFFFF; /* CHANGED: Solid white background */
+    background-color: #FFFFFF;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .search-box input:focus {
     outline: none;
-    border-color: #4299E1; /* CHANGED: Blue highlight on focus */
+    border-color: #4299E1;
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
 
 .search-box button {
     padding: 12px 25px;
     font-size: 16px;
-    background-color: #4299E1; /* CHANGED: New primary button color */
+    background-color: #4299E1;
     color: white;
     border: none;
     border-radius: 30px;
@@ -74,7 +71,7 @@ header h1 {
 }
 
 .search-box button:hover {
-    background-color: #2B6CB0; /* CHANGED: Darker blue on hover */
+    background-color: #2B6CB0;
 }
 
 /* --- Main Layout & Cards --- */
@@ -91,7 +88,7 @@ main {
 #initial-message {
     text-align: center;
     font-size: 1.5rem;
-    color: #718096; /* CHANGED: Softer gray text */
+    color: #718096;
 }
 
 /* --- Current Weather & Effects (Left Side) --- */
@@ -102,24 +99,23 @@ main {
 }
 
 #current-weather-card, #weather-effects-card {
-    background: #FFFFFF; /* CHANGED: Solid white card background */
+    background: #FFFFFF;
     border-radius: 15px;
     padding: 30px;
-    /* CHANGED: New subtle shadow */
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 #current-weather-card h2 {
     margin-top: 0;
     font-size: 1.8rem;
-    text-align: center; /* ALIGNMENT: Center city name */
+    text-align: center;
 }
 
 .current-pincode {
     font-weight: 600;
     color: #718096;
     margin-top: -10px;
-    text-align: center; /* ALIGNMENT: Center pincode */
+    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -128,7 +124,7 @@ main {
     font-weight: 700;
     margin: 10px 0;
     color: #2D3748;
-    text-align: center; /* ALIGNMENT: Center temperature */
+    text-align: center;
 }
 .current-temp span {
     font-size: 1.5rem;
@@ -139,12 +135,11 @@ main {
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: capitalize;
-    text-align: center; /* ALIGNMENT: Center description */
+    text-align: center;
     margin-bottom: 25px;
 }
 
 .current-details {
-    /* ALIGNMENT: Evenly space the details */
     display: flex;
     justify-content: space-around;
     text-align: center;
@@ -154,13 +149,13 @@ main {
     margin: 8px 0;
     font-size: 1rem;
     display: flex;
-    flex-direction: column; /* ALIGNMENT: Stack label and value */
+    flex-direction: column;
     gap: 4px;
 }
 
 #weather-effects-card h2 {
     margin-top: 0;
-    color: #4299E1; /* CHANGED: Match button color */
+    color: #4299E1;
 }
 
 #effects-text {
@@ -173,17 +168,17 @@ main {
     text-align: center;
     margin-top: 0;
     margin-bottom: 20px;
-    text-shadow: none; /* REMOVED: Text shadow not needed on light background */
+    text-shadow: none;
 }
 
 #forecast-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px; /* ALIGNMENT: Increased gap for better spacing */
+    gap: 20px;
 }
 
 .forecast-card {
-    background: #FFFFFF; /* CHANGED: Solid white */
+    background: #FFFFFF;
     border-radius: 15px;
     padding: 20px;
     text-align: center;
@@ -205,7 +200,7 @@ main {
 .forecast-card img {
     width: 60px;
     height: 60px;
-    margin: 0 auto; /* ALIGNMENT: Ensure icon is centered */
+    margin: 0 auto;
 }
 
 .forecast-temp {
@@ -214,7 +209,9 @@ main {
     color: #2D3748;
 }
 
-/* --- Nature Backgrounds (No Changes) --- */
+/* ================================================================= */
+/* ▼▼▼ UPDATED: Day & Night Backgrounds ▼▼▼ */
+/* ================================================================= */
 .weather-background {
     position: fixed;
     top: 0;
@@ -228,14 +225,28 @@ main {
     transition: opacity 1.2s ease-in-out;
 }
 
-#sunny-bg {
-    background-image: url('https://images.pexels.com/photos/3768/sky-sunny-clouds-cloudy.jpg');
+/* --- Day Backgrounds --- */
+#sunny-day-bg {
+    background-image: url('https://images.pexels.com/photos/589840/pexels-photo-589840.jpeg');
 }
 
-#rainy-bg {
+#cloudy-day-bg {
+    background-image: url('https://images.pexels.com/photos/53594/blue-clouds-day-fluffy-53594.jpeg');
+}
+
+#rainy-day-bg {
     background-image: url('https://images.pexels.com/photos/1529360/pexels-photo-1529360.jpeg');
 }
 
-#cloudy-bg {
-    background-image: url('https://images.pexels.com/photos/53594/blue-clouds-day-fluffy-53594.jpeg');
+/* --- Night Backgrounds --- */
+#clear-night-bg {
+    background-image: url('https://images.pexels.com/photos/1252890/pexels-photo-1252890.jpeg');
+}
+
+#cloudy-night-bg {
+    background-image: url('https://images.pexels.com/photos/414144/pexels-photo-414144.jpeg');
+}
+
+#rainy-night-bg {
+    background-image: url('https://images.pexels.com/photos/3109671/pexels-photo-3109671.jpeg');
 }
